@@ -45,6 +45,8 @@ AABCharacter::AABCharacter()
 
 	//SetControlMode(EControlMode::GTA); //GTA 조작모드
 	SetControlMode(EControlMode::DIABLO); //디아블로 조작모드
+
+	GetCharacterMovement()->JumpZVelocity = 800.0f; //점프 높이 설정
 }
 
 // Called when the game starts or when spawned
@@ -133,6 +135,7 @@ void AABCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	//키 입력 매핑
 
 	PlayerInputComponent->BindAction(TEXT("ViewChange"), EInputEvent::IE_Pressed, this, &AABCharacter::ViewChange);
+	PlayerInputComponent->BindAction(TEXT("Jump"), EInputEvent::IE_Pressed, this, &ACharacter::Jump); //점프를 구현하려면 ACharacter 클래스에 구현되어있는 Jump 함수 연동하면 됨
 
 	PlayerInputComponent->BindAxis(TEXT("UpDown"), this, &AABCharacter::UpDown);
 	PlayerInputComponent->BindAxis(TEXT("LeftRight"), this, &AABCharacter::LeftRight);
